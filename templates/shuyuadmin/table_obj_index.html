@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load tags %}
-
+{% block head %}
+            <!--Unite Gallery [ OPTIONAL ]-->
+    <link href="/statics/plugins/unitegallery/css/unitegallery.min.css" rel="stylesheet">
+{% endblock %}
 {% block content %}
         <div id="container" class="effect aside-float aside-bright mainnav-lg">
 
@@ -213,7 +216,6 @@
             <!--CONTENT CONTAINER-->
             <!--===================================================-->
             <div id="content-container">
-                ::before == $0
                 <div id="page-head">
                     <!--Breadcrumb-->
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -233,7 +235,317 @@
                 {% endblock %}
 
                 {% block page-content %}
+				<div id="page-content">
+					   <div class="panel">
+					        <div class="pad-all">
+					            <div id="demo-gallery" style="display:none;">
+					                <a href="#">
+					                    <img alt="The winding road"
+					                         src="/statics/img/gallery/thumbs/tile1.jpg"
+					                         data-image="/statics/img/gallery/big/tile1.jpg"
+					                         data-description="The winding road description"
+					                         style="display:none">
+					                </a>
 
+					                <a href="#">
+					                    <img alt="Pancake"
+					                         src="/statics/img/gallery/thumbs/tile2.jpg"
+					                         data-image="/statics/img/gallery/big/tile2.jpg"
+					                         data-description="A pancake is a flat cake, often thin and round, prepared from a starch-based batter"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Foreshore"
+					                         src="/statics/img/gallery/thumbs/tile3.jpg"
+					                         data-image="/statics/img/gallery/big/tile3.jpg"
+					                         data-description="The part of a shore between high- and low-water marks, or between the water and cultivated or developed land."
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Yellow Flowers"
+					                         src="/statics/img/gallery/thumbs/tile4.jpg"
+					                         data-image="/statics/img/gallery/big/tile4.jpg"
+					                         data-description="Those are yellow flowers"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Waterfall"
+					                         src="/statics/img/gallery/thumbs/tile5.jpg"
+					                         data-image="/statics/img/gallery/big/tile5.jpg"
+					                         data-description="A waterfall is a place where water flows over a vertical drop or a series of steep drops in the course of a stream or river."
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Pumpkin"
+					                         src="/statics/img/gallery/thumbs/tile6.jpg"
+					                         data-image="/statics/img/gallery/big/tile6.jpg"
+					                         data-description="A pumpkin is a cultivar of a squash plant, most commonly of Cucurbita pepo, that is round, with smooth, slightly ribbed skin, and deep yellow to orange coloration."
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="In the jungle"
+					                         src="/statics/img/gallery/thumbs/tile7.jpg"
+					                         data-image="/statics/img/gallery/big/tile7.jpg"
+					                         data-description="This is my car"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Note"
+					                         src="/statics/img/gallery/thumbs/tile8.jpg"
+					                         data-image="/statics/img/gallery/big/tile8.jpg"
+					                         data-description="This is a note"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Off-Road Motorcycle"
+					                         src="/statics/img/gallery/thumbs/tile9.jpg"
+					                         data-image="/statics/img/gallery/big/tile9.jpg"
+					                         data-description="This is a motorcycle"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Adventure"
+					                         src="/statics/img/gallery/thumbs/tile10.jpg"
+					                         data-image="/statics/img/gallery/big/tile10.jpg"
+					                         data-description="River Adventure Camping"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="The winding road"
+					                         src="/statics/img/gallery/thumbs/tile1.jpg"
+					                         data-image="/statics/img/gallery/big/tile1.jpg"
+					                         data-description="The winding road description"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Pancake"
+					                         src="/statics/img/gallery/thumbs/tile2.jpg"
+					                         data-image="/statics/img/gallery/big/tile2.jpg"
+					                         data-description="A pancake is a flat cake, often thin and round, prepared from a starch-based batter"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Foreshore"
+					                         src="/statics/img/gallery/thumbs/tile3.jpg"
+					                         data-image="/statics/img/gallery/big/tile3.jpg"
+					                         data-description="The part of a shore between high- and low-water marks, or between the water and cultivated or developed land."
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Yellow Flowers"
+					                         src="/statics/img/gallery/thumbs/tile4.jpg"
+					                         data-image="/statics/img/gallery/big/tile4.jpg"
+					                         data-description="Those are yellow flowers"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Waterfall"
+					                         src="/statics/img/gallery/thumbs/tile5.jpg"
+					                         data-image="/statics/img/gallery/big/tile5.jpg"
+					                         data-description="A waterfall is a place where water flows over a vertical drop or a series of steep drops in the course of a stream or river."
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Pumpkin"
+					                         src="/statics/img/gallery/thumbs/tile6.jpg"
+					                         data-image="/statics/img/gallery/big/tile6.jpg"
+					                         data-description="A pumpkin is a cultivar of a squash plant, most commonly of Cucurbita pepo, that is round, with smooth, slightly ribbed skin, and deep yellow to orange coloration."
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="In the jungle"
+					                         src="/statics/img/gallery/thumbs/tile7.jpg"
+					                         data-image="/statics/img/gallery/big/tile7.jpg"
+					                         data-description="This is my car"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Note"
+					                         src="/statics/img/gallery/thumbs/tile8.jpg"
+					                         data-image="/statics/img/gallery/big/tile8.jpg"
+					                         data-description="This is a note"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Off-Road Motorcycle"
+					                         src="/statics/img/gallery/thumbs/tile9.jpg"
+					                         data-image="/statics/img/gallery/big/tile9.jpg"
+					                         data-description="This is a motorcycle"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="The winding road"
+					                         src="/statics/img/gallery/thumbs/tile1.jpg"
+					                         data-image="/statics/img/gallery/big/tile1.jpg"
+					                         data-description="The winding road description"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Pancake"
+					                         src="/statics/img/gallery/thumbs/tile2.jpg"
+					                         data-image="/statics/img/gallery/big/tile2.jpg"
+					                         data-description="A pancake is a flat cake, often thin and round, prepared from a starch-based batter"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Foreshore"
+					                         src="/statics/img/gallery/thumbs/tile3.jpg"
+					                         data-image="/statics/img/gallery/big/tile3.jpg"
+					                         data-description="The part of a shore between high- and low-water marks, or between the water and cultivated or developed land."
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Yellow Flowers"
+					                         src="/statics/img/gallery/thumbs/tile4.jpg"
+					                         data-image="/statics/img/gallery/big/tile4.jpg"
+					                         data-description="Those are yellow flowers"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Waterfall"
+					                         src="/statics/img/gallery/thumbs/tile5.jpg"
+					                         data-image="/statics/img/gallery/big/tile5.jpg"
+					                         data-description="A waterfall is a place where water flows over a vertical drop or a series of steep drops in the course of a stream or river."
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Pumpkin"
+					                         src="/statics/img/gallery/thumbs/tile6.jpg"
+					                         data-image="/statics/img/gallery/big/tile6.jpg"
+					                         data-description="A pumpkin is a cultivar of a squash plant, most commonly of Cucurbita pepo, that is round, with smooth, slightly ribbed skin, and deep yellow to orange coloration."
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="In the jungle"
+					                         src="/statics/img/gallery/thumbs/tile7.jpg"
+					                         data-image="/statics/img/gallery/big/tile7.jpg"
+					                         data-description="This is my car"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Note"
+					                         src="/statics/img/gallery/thumbs/tile8.jpg"
+					                         data-image="/statics/img/gallery/big/tile8.jpg"
+					                         data-description="This is a note"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Off-Road Motorcycle"
+					                         src="/statics/img/gallery/thumbs/tile9.jpg"
+					                         data-image="/statics/img/gallery/big/tile9.jpg"
+					                         data-description="This is a motorcycle"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Adventure"
+					                         src="/statics/img/gallery/thumbs/tile10.jpg"
+					                         data-image="/statics/img/gallery/big/tile10.jpg"
+					                         data-description="River Adventure Camping"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="The winding road"
+					                         src="/statics/img/gallery/thumbs/tile1.jpg"
+					                         data-image="/statics/img/gallery/big/tile1.jpg"
+					                         data-description="The winding road description"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Pancake"
+					                         src="/statics/img/gallery/thumbs/tile2.jpg"
+					                         data-image="/statics/img/gallery/big/tile2.jpg"
+					                         data-description="A pancake is a flat cake, often thin and round, prepared from a starch-based batter"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Foreshore"
+					                         src="/statics/img/gallery/thumbs/tile3.jpg"
+					                         data-image="/statics/img/gallery/big/tile3.jpg"
+					                         data-description="The part of a shore between high- and low-water marks, or between the water and cultivated or developed land."
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Yellow Flowers"
+					                         src="/statics/img/gallery/thumbs/tile4.jpg"
+					                         data-image="/statics/img/gallery/big/tile4.jpg"
+					                         data-description="Those are yellow flowers"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Waterfall"
+					                         src="/statics/img/gallery/thumbs/tile5.jpg"
+					                         data-image="/statics/img/gallery/big/tile5.jpg"
+					                         data-description="A waterfall is a place where water flows over a vertical drop or a series of steep drops in the course of a stream or river."
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Pumpkin"
+					                         src="/statics/img/gallery/thumbs/tile6.jpg"
+					                         data-image="/statics/img/gallery/big/tile6.jpg"
+					                         data-description="A pumpkin is a cultivar of a squash plant, most commonly of Cucurbita pepo, that is round, with smooth, slightly ribbed skin, and deep yellow to orange coloration."
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="In the jungle"
+					                         src="/statics/img/gallery/thumbs/tile7.jpg"
+					                         data-image="/statics/img/gallery/big/tile7.jpg"
+					                         data-description="This is my car"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Note"
+					                         src="/statics/img/gallery/thumbs/tile8.jpg"
+					                         data-image="/statics/img/gallery/big/tile8.jpg"
+					                         data-description="This is a note"
+					                         style="display:none">
+					                </a>
+
+					                <a href="#">
+					                    <img alt="Off-Road Motorcycle"
+					                         src="/statics/img/gallery/thumbs/tile9.jpg"
+					                         data-image="/statics/img/gallery/big/tile9.jpg"
+					                         data-description="This is a motorcycle"
+					                         style="display:none">
+					                </a>
+					            </div>
+					        </div>
+					    </div>
+                </div>
                 {% endblock %}
 
             </div>
@@ -245,7 +557,6 @@
             <!--===================================================-->
             <nav id="mainnav-container">
                 <div id="mainnav">
-
                     <!--Menu-->
                     <!--================================-->
                     <div id="mainnav-menu-wrap">
@@ -348,5 +659,21 @@
 
 
 {% block javascript %}
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="/statics/js/demo/nifty-demo.min.js"></script>
+    <script src="/statics/plugins/unitegallery/js/unitegallery.min.js"></script>
+    <script src="/statics/plugins/unitegallery/js/unitegallery.js"></script>
+	<script src="/statics/plugins/unitegallery/themes/tilesgrid/ug-theme-tilesgrid.js"></script>
 
+    <!--Custom script [ DEMONSTRATION ]-->
+    <!--===================================================-->
+    <script>
+        $(document).on('nifty.ready', function () {
+
+			$("#demo-gallery").unitegallery({
+			    tile_enable_shadow: false
+			});
+
+        });
+    </script>
 {% endblock %}
