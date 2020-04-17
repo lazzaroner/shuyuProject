@@ -1,6 +1,8 @@
 from django.template import Library
 from django.utils.safestring import mark_safe
 from shuyuadmin.admin_sites import site
+from shuyuadmin.models import Menu
+
 
 register = Library()
 
@@ -52,6 +54,11 @@ def get_row_data(obj, admin_class):
             column_data = getattr(obj, 'get_%s_display' % column)()
         else:
             column_data = getattr(obj, column)
+        if isinstance(column_data, bool):
+            if column_data:
+                column_data = """<span class="label label-success">{data}</span>""".format(data=column_data)
+            else:
+                column_data = """<span class="label label-dark">{data}</span>""".format(data=column_data)
         ret_data += "<td>%s</td>" % column_data
     return mark_safe(ret_data)
 
@@ -59,7 +66,7 @@ def get_row_data(obj, admin_class):
 @register.simple_tag
 def get_filter_data(admin_class):
     """
-    根据admin类配置的过滤字段返回下拉框内容（放弃）
+    根据admin类配置的过滤字段返回下拉框内容（废弃）
     :param admin_class:
     :return:
     """
@@ -204,3 +211,21 @@ def check_permission(user_obj, app_name, table_name, url):
                 return True
 
         return False
+
+
+@register.simple_tag
+def get_menu_active_class(my_menu, table_name, menu_id):
+    for sub_menu in my_menu[menu_id]['children']:
+        for k,v in sub_menu.items():
+            if v['table_name'] == table_name:
+                return "active-sub active"
+    return ""
+
+
+@register.simple_tag
+def get_menu_url_active_class(my_menu, table_name, menu_id):
+    for k, v in my_menu.items():
+        for sub_menu in v['children']:
+            if menu_id in sub_menu and sub_menu[menu_id]['table_name'] == table_name:
+                return "active-link"
+    return ""

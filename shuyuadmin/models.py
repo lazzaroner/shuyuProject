@@ -83,6 +83,7 @@ class Menu(models.Model):
     open = models.BooleanField(null=True, blank=True, default=True)
     sort_index = models.IntegerField(null=True, blank=True, default=1)
     parent = models.ForeignKey('Menu', null=True, blank=True, on_delete=models.CASCADE)
+    icon = models.CharField(max_length=32, null=True, blank=True)
 
     # 定义菜单间的自引用关系
     # 权限url 在 菜单下；菜单可以有父级菜单；还要支持用户创建菜单，因此需要定义parent字段（parent_id）

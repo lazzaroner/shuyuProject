@@ -177,23 +177,19 @@
                                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                             </a>
 
-
                             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
                                 <ul class="head-list">
                                     <li>
-                                        <a href="#"><i class="demo-pli-male icon-lg icon-fw"></i> Profile</a>
+                                        <a href="#"><i class="demo-pli-male icon-lg icon-fw"></i> 个人中心</a>
                                     </li>
                                     <li>
-                                        <a href="#"><span class="badge badge-danger pull-right">9</span><i class="demo-pli-mail icon-lg icon-fw"></i> Messages</a>
+                                        <a href="#"><i class="demo-pli-gear icon-lg icon-fw"></i> 修改密码</a>
                                     </li>
                                     <li>
-                                        <a href="#"><span class="label label-success pull-right">New</span><i class="demo-pli-gear icon-lg icon-fw"></i> Settings</a>
+                                        <a href="#"><i class="demo-pli-computer-secure icon-lg icon-fw"></i> 锁定屏幕</a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="demo-pli-computer-secure icon-lg icon-fw"></i> Lock screen</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="demo-pli-unlock icon-lg icon-fw"></i> Logout</a>
+                                        <a href="#"><i class="demo-pli-unlock icon-lg icon-fw"></i> 退出</a>
                                     </li>
                                 </ul>
                             </div>
@@ -574,6 +570,7 @@
                                     </div>
                                 </div>
 
+                                {% block menu %}
                                  <!--Category name-->
                                 <ul id="mainnav-menu" class="list-group">
                                     {% for id, menu in my_menu.items %}
@@ -601,7 +598,7 @@
                                     {% endfor %}
 
                                 </ul>
-
+                                {% endblock %}
                             </div>
                         </div>
                     </div>

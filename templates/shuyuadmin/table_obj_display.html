@@ -121,3 +121,33 @@
     <!--End page content-->
 {% endblock %}
 
+{% block menu %}
+                                 <!--Category name-->
+                                <ul id="mainnav-menu" class="list-group">
+                                    {% for id, menu in my_menu.items %}
+                                        {% if menu.status %}
+                                            <li class="{% get_menu_active_class my_menu table_name id %}">
+                                                <a href="#">
+                                                    <i class="demo-pli-home"></i>
+                                                    <span class="menu-title">{{ menu.title }}</span>
+                                                    <i class="arrow"></i>
+                                                </a>
+
+
+                                                <!--Submenu-->
+                                                <ul class="collapse">
+                                                    {% for children_menu in menu.children %}
+                                                        {% for sub_id, sub_menu in children_menu.items %}
+                                                            {% if  sub_menu.status %}
+                                                                <li class="{% get_menu_url_active_class my_menu table_name sub_id %}"><a href="/shuyuadmin/{{ sub_menu.app_name }}/{{ sub_menu.table_name }}">{{ sub_menu.title }}</a></li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                </ul>
+
+{% endblock %}

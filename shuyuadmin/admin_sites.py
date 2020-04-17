@@ -66,7 +66,7 @@ class AdminSite(object):
         try:
             sys_menu_obj = Menu.objects.get(title='系统管理')
         except Menu.DoesNotExist:
-            sys_menu_obj = Menu(title='系统管理')
+            sys_menu_obj = Menu(title='系统管理', icon='demo-pli-home')
             sys_menu_obj.save()
 
         # 创建model菜单
