@@ -2,7 +2,7 @@
 {% load tags %}
 
 {% block page-head %}
-    <li><a href="">{% get_table_name2 app_name table_name %}</a></li>
+    <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}">{% get_table_name2 app_name table_name %}</a></li>
 {% endblock %}
 
 {% block search %}
@@ -46,7 +46,7 @@
                                 <div class="pad-btm form-inline">
                                                 <div class="row">
                                                     <div class="col-sm-6 table-toolbar-left">
-                                                        <button class="btn btn-purple"><i class="demo-pli-add icon-fw"></i>添加</button>
+                                                        <button id='table_obj_add' class="btn btn-purple"><i class="demo-pli-add icon-fw"></i>添加</button>
                                                     </div>
                                                 </div>
                                 </div>
@@ -149,5 +149,17 @@
                                     {% endfor %}
 
                                 </ul>
+
+{% endblock %}
+
+{% block javascript %}
+
+        <script>
+        $(document).ready(function () {
+            $("#table_obj_add").on('click', function () {
+                window.location.href="/shuyuadmin/{{ app_name }}/{{ table_name }}/add";
+            });
+        });
+    </script>
 
 {% endblock %}

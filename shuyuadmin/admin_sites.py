@@ -10,6 +10,7 @@ class BaseAdmin(object):
     filter_horizontal = []
     list_per_page = 8
     actions = []
+    readonly_fields = []
     pass
 
 

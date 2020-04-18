@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from shuyuadmin.admin_sites import site
 from shuyuadmin.utils import pager, permissions
+from shuyuadmin.utils.form_handle import create_model_form
 
 
 @login_required()
@@ -116,7 +117,14 @@ def table_obj_display(request, app_name, table_name):
     return render(request, 'shuyuadmin/table_obj_display.html', return_data)
 
 
-def table_obj_add(request):
+def table_obj_add(request, app_name, table_name):
+    admin_class = site.enabled_admins[app_name][table_name]
+    dynamic_form = create_model_form(admin_class, add=True)
+    my_menu = permissions.get_permissions_menu(request.user)
+    if request.method == 'GET':
+        return render(request, 'shuyuadmin/table_obj_add.html', locals())
+    elif request.method == 'POST':
+        pass
     pass
 
 
