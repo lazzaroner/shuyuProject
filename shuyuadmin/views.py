@@ -65,6 +65,7 @@ def password_reset(request):
     pass
 
 
+@login_required
 def password_reminder(request):
     """
     忘记密码
@@ -83,6 +84,7 @@ def register(request):
     pass
 
 
+@login_required
 def table_obj_index(request):
     return_data = {
         'enabled_admins': site.enabled_admins,
@@ -91,6 +93,7 @@ def table_obj_index(request):
     return render(request, 'shuyuadmin/table_obj_index.html', return_data)
 
 
+@login_required
 def table_obj_display(request, app_name, table_name):
     # # 通过反射根据表名获取表名的对象
     # model_obj = getattr(models_module, table_name)
@@ -117,6 +120,7 @@ def table_obj_display(request, app_name, table_name):
     return render(request, 'shuyuadmin/table_obj_display.html', return_data)
 
 
+@login_required
 def table_obj_add(request, app_name, table_name):
     admin_class = site.enabled_admins[app_name][table_name]
     dynamic_form = create_model_form(admin_class, add=True)
@@ -128,9 +132,32 @@ def table_obj_add(request, app_name, table_name):
     pass
 
 
+@login_required
+def table_obj_show(request, app_name, table_name, nid):
+    admin_class = site.enabled_admins[app_name][table_name]
+    dynamic_form = create_model_form(admin_class, add=False)
+    my_menu = permissions.get_permissions_menu(request.user)
+    obj_id = nid
+    show_form = dynamic_form(instance=admin_class.model.objects.get(id=nid))
+    return render(request, 'shuyuadmin/table_obj_show.html', locals())
+
+
+@login_required
 def table_obj_delete(request, nid):
     pass
 
 
-def table_obj_update(request, nid):
-    pass
+@login_required
+def table_obj_update(request, app_name, table_name, nid):
+    admin_class = site.enabled_admins[app_name][table_name]
+    dynamic_form = create_model_form(admin_class, add=False)
+    my_menu = permissions.get_permissions_menu(request.user)
+    obj_id = nid
+    show_form = dynamic_form(instance=admin_class.model.objects.get(id=nid))
+    if request.method == 'GET':
+        return render(request, 'shuyuadmin/table_obj_update.html', locals())
+    elif request.method == 'POST':
+        show_form = dynamic_form(request.POST)
+        print(show_form.is_valid())
+        # admin_class.model.save(**show_form.clean_data())
+        return render(request, 'shuyuadmin/table_obj_update.html', locals())

@@ -71,11 +71,12 @@
                                                                         {% check_permission request.user app_name table_name 'table_obj_delete' as has_delete_permission %}
                                                                         {% check_permission request.user app_name table_name 'table_obj_update' as has_update_permission %}
                                                                         {% check_permission request.user app_name table_name 'table_obj_display' as has_display_permission %}
+                                                                        {% get_row_id obj as obj_id %}
                                                                         {% if has_display_permission %}
-                                                                            <a class="btn btn-sm btn-default btn-hover-info demo-pli-information add-tooltip" href="#" data-original-title="查看" data-container="body"></a>
+                                                                            <a class="btn btn-sm btn-default btn-hover-info demo-pli-information add-tooltip" href="{% url 'table_obj_show' app_name table_name obj_id%}" data-original-title="查看" data-container="body"></a>
                                                                         {% endif %}
                                                                         {% if has_update_permission %}
-                                                                            <a class="btn btn-sm btn-default btn-hover-success demo-psi-pen-5 add-tooltip" href="#" data-original-title="编辑" data-container="body"></a>
+                                                                            <a class="btn btn-sm btn-default btn-hover-success demo-psi-pen-5 add-tooltip" href="{% url 'table_obj_update' app_name table_name obj_id%}" data-original-title="编辑" data-container="body"></a>
                                                                         {% endif %}
                                                                         {% if has_delete_permission %}
                                                                             <a class="btn btn-sm btn-default btn-hover-danger demo-pli-trash add-tooltip" href="#" data-original-title="删除" data-container="body"></a>

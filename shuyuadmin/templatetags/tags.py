@@ -64,6 +64,16 @@ def get_row_data(obj, admin_class):
 
 
 @register.simple_tag
+def get_row_id(obj):
+    """
+    返回记录的id
+    :param obj:
+    :return:
+    """
+    return mark_safe(getattr(obj, 'id'))
+
+
+@register.simple_tag
 def get_filter_data(admin_class):
     """
     根据admin类配置的过滤字段返回下拉框内容（废弃）

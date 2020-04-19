@@ -3,7 +3,7 @@
 
 {% block page-head %}
     <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}">{% get_table_name2 app_name table_name %}</a></li>
-    <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}/add">添加</a></li>
+    <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}/show/{{ obj_id }}">查看</a></li>
 
 {% endblock %}
 
@@ -22,11 +22,11 @@
 					    <div class="panel">
 					        <div class="panel-body">
 					            <div class="panel-heading">
-					                <h3 class="panel-title">{% get_table_name2 app_name table_name %}-添加记录</h3>
+					                <h3 class="panel-title">{% get_table_name2 app_name table_name %}-查看记录</h3>
 					            </div>
                                 <hr>
                                  <form class="panel-body form-horizontal form-padding" method="post">
-                                    {% for field in dynamic_form %}
+                                    {% for field in show_form %}
                                         <div class="form-group">
                                             <label class="col-md-3 control-label" for="id_{{ field.name }}">{{ field.label }}</label>
                                             <div class="col-md-9">
@@ -35,16 +35,9 @@
                                             </div>
 					                    </div>
                                     {% endfor %}
-                                 <div class="col-md-1 pull-right">
-                                     <input class="btn btn-primary" type="submit" value="保存">
-                                 </div>
                                  </form>
 					        </div>
 					    </div>
-
-
-
-
                 </div>
     <!--===================================================-->
     <!--End page content-->
