@@ -79,7 +79,7 @@
                                                                             <a class="btn btn-sm btn-default btn-hover-success demo-psi-pen-5 add-tooltip" href="{% url 'table_obj_update' app_name table_name obj_id%}" data-original-title="编辑" data-container="body"></a>
                                                                         {% endif %}
                                                                         {% if has_delete_permission %}
-                                                                            <a class="btn btn-sm btn-default btn-hover-danger demo-pli-trash add-tooltip" href="#" data-original-title="删除" data-container="body"></a>
+                                                                            <a class="btn btn-sm btn-default btn-hover-danger demo-pli-trash add-tooltip" onclick="del({{ obj_id }})" data-original-title="删除" data-container="body"></a>
                                                                         {% endif %}
                                                                     </div>
                                                                 </td>
@@ -161,6 +161,12 @@
                 window.location.href="/shuyuadmin/{{ app_name }}/{{ table_name }}/add";
             });
         });
+
+        function del(obj_id) {
+            if(confirm("请确认删除！")){
+                window.location.href="/shuyuadmin/{{ app_name }}/{{ table_name }}/delete/"+obj_id;
+            }
+        }
     </script>
 
 {% endblock %}

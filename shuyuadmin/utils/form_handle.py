@@ -12,9 +12,21 @@ def create_model_form(admin_class, add=False):
 
     def __new__(cls, *args, **kwargs):
         # 方法2：在实例化类对象（model_form()）的时候给input框增加样式
-        print(cls.base_fields)  # 当地类的所有字段
+        # print(cls.base_fields)  # 当地类的所有字段
         for field_name, field_obj in cls.base_fields.items():
-            print(field_name, field_obj)
+            from django.forms.fields import TypedChoiceField
+            from django.forms.models import ModelMultipleChoiceField
+
+            print(field_name, field_obj, isinstance(field_obj, TypedChoiceField), isinstance(field_obj, ModelMultipleChoiceField))
+            # # 单选
+            # if isinstance(field_obj, TypedChoiceField):
+            #     field_obj.widget.attrs.update({'id': 'demo-chosen-select'})
+            # # 多选
+            # elif isinstance(field_obj, ModelMultipleChoiceField):
+            #     field_obj.widget.attrs.update({'id': 'demo-cs-multiselect'})
+            #     field_obj.widget.attrs.update({'multiple': ''})
+            #     field_obj.widget.attrs.update({'tabindex': '4'})
+            # else:
             field_obj.widget.attrs.update({'class': 'form-control selectpicker'})  #　给当前字段对象增加样式
             #
             # if field_obj.label=='Content':
