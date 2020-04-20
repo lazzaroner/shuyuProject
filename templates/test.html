@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+    {% block head %}
+    <!--Animate.css [ OPTIONAL ]-->
+    <link href="/statics/plugins/animate-css/animate.min.css" rel="stylesheet">
+    {% endblock %}
+
+    {% block content %}
+    <h1>hei</h1>
+        					        <!--Static Examplel-->
+					        <div class="modal show">
+					            <div class="modal-dialog">
+					                <div class="modal-content">
+					                    <div class="modal-header">
+					                        <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
+					                        <h4 class="modal-title">Modal title</h4>
+					                    </div>
+
+					                    <div class="modal-body">
+					                        <p>是否确认删除记录？</p>
+					                    </div>
+
+					                    <div class="modal-footer">
+					                        <button class="btn btn-default" data-dismiss="modal" type="button">取消</button>
+					                        <button class="btn btn-primary" type="button">确定</button>
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
+        <hr>
+        <button id="aaaa">删除</button>
+    {% endblock%}
+
+    {% block javascript %}
+    <!--Bootbox Modals [ OPTIONAL ]-->
+    <script src="/statics/plugins/bootbox/bootbox.min.js"></script>
+
+
+    <!--Modals [ SAMPLE ]-->
+    <script src="/statics/js/demo/ui-modals.js"></script>
+                <script>
+        $(document).ready(function () {
+            $("#aaaa").on('click', function () {
+                $("#modal").addClass('show')
+            });
+        });
+    </script>
+    {% endblock %}

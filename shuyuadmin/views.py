@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from shuyuadmin.admin_sites import site
 from shuyuadmin.utils import pager, permissions
 from shuyuadmin.utils.form_handle import create_model_form
+import json
 
 
 @login_required()
@@ -154,10 +155,20 @@ def table_obj_update(request, app_name, table_name, nid):
     my_menu = permissions.get_permissions_menu(request.user)
     obj_id = nid
     show_form = dynamic_form(instance=admin_class.model.objects.get(id=nid))
+    errors_obj = {}
+    errors = json.dumps(errors_obj)
+    success = ''
     if request.method == 'GET':
         return render(request, 'shuyuadmin/table_obj_update.html', locals())
     elif request.method == 'POST':
         show_form = dynamic_form(request.POST)
-        print(show_form.is_valid())
-        # admin_class.model.save(**show_form.clean_data())
+        if show_form.is_valid():
+            admin_class.model.objects.filter(id=nid).update(**show_form.cleaned_data)
+            success = '操作成功'
+        else:
+            errors = show_form.errors.as_json()
         return render(request, 'shuyuadmin/table_obj_update.html', locals())
+
+
+def test(request):
+    return render(request, 'test.html')

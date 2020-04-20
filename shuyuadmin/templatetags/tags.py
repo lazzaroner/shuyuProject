@@ -239,3 +239,13 @@ def get_menu_url_active_class(my_menu, table_name, menu_id):
             if menu_id in sub_menu and sub_menu[menu_id]['table_name'] == table_name:
                 return "active-link"
     return ""
+
+
+@register.simple_tag
+def get_errors_message(errors, field_name):
+    import json
+    errors_obj = json.loads(errors)
+    message_list = errors_obj.get(field_name)
+    if message_list:
+        return message_list[0].get('message')
+    return ''

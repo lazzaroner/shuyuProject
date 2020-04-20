@@ -9,6 +9,7 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('reset', views.password_reset, name='password_reset'),
     path('reminder', views.password_reminder, name='password_reminder'),
+    path('test', views.test),
 
     path('<app_name>/<table_name>', views.table_obj_display, name='table_obj_display'),
     path('<app_name>/<table_name>/add', views.table_obj_add, name='table_obj_add'),
