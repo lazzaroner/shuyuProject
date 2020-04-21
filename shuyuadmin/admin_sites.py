@@ -127,11 +127,15 @@ class MyPermissionAdmin(BaseAdmin):
     search_fields = ['title', 'app_name', 'table_name']
 
 
+class MyMenuAdmin(BaseAdmin):
+    readonly_fields = ['title']
+
+
 site = AdminSite()
 
 site.register(Role)
 site.register(MyUser)
-site.register(Menu)
+site.register(Menu, MyMenuAdmin)
 site.register(Permission, MyPermissionAdmin)
 site.register(models.Product, MyProductAdmin)
 

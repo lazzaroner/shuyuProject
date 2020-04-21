@@ -1,12 +1,12 @@
 from django.forms import ModelForm
 
 
-def create_model_form(admin_class, add=False):
+def create_model_form(admin_class, add=False, show=False):
 
     class Meta:
         model = admin_class.model  # 指定类
         fields = '__all__'  # 指定字段
-        exclude = admin_class.readonly_fields  # 排除指定的字段，也不会生成form对象
+        # exclude = admin_class.readonly_fields  # 排除指定的字段，也不会生成form对象
         if add:
             exclude = []
 
@@ -16,7 +16,6 @@ def create_model_form(admin_class, add=False):
         for field_name, field_obj in cls.base_fields.items():
             from django.forms.fields import TypedChoiceField
             from django.forms.models import ModelMultipleChoiceField
-
             print(field_name, field_obj, isinstance(field_obj, TypedChoiceField), isinstance(field_obj, ModelMultipleChoiceField))
             # # 单选
             # if isinstance(field_obj, TypedChoiceField):
@@ -41,12 +40,15 @@ def create_model_form(admin_class, add=False):
             #     field_obj._queryset = field_obj._queryset.filter(role__title='销售')
             #     pass
             #
-            # if field_name in admin_class.readonly_fields:
-            #     # 但是设置为disabled后，form表单不会提交数据
-            #     if add:
-            #         pass
-            #     else:
-            #         field_obj.widget.attrs.update({'disabled': 'true'})
+            if show:
+                field_obj.widget.attrs.update({'disabled': 'disabled'})
+
+            if field_name in admin_class.readonly_fields:
+                # 但是设置为disabled后，form表单不会提交数据
+                if add:
+                    pass
+                else:
+                    field_obj.widget.attrs.update({'readonly': 'readonly'})
         return ModelForm.__new__(cls)
 
     dynamic_form = type("DynamicModelForm", (ModelForm,), {'Meta': Meta, '__new__': __new__})

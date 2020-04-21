@@ -1,11 +1,66 @@
 {% extends 'base.html' %}
     {% block head %}
+           <!--Animate.css [ OPTIONAL ]-->
+    <link href="/statics/plugins/animate-css/animate.min.css" rel="stylesheet">
     {% endblock %}
 
     {% block content %}
+        <div class="modal fade" id="demo-default-modal" role="dialog" tabindex="-1" aria-labelledby="demo-default-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
+                <!--Modal header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
+                    <h4 class="modal-title">Modal Heading</h4>
+                </div>
+
+                <!--Modal body-->
+                <div class="modal-body">
+
+					                        <div class="nano" style="height:360px">
+					                            <div class="nano-content">
+                                                    <div class="clearfix demo-icon-list">
+                                                             {% for icon in icons %}
+                                                            <div class="col-sm-1 col-md-2">
+                                                                <div class="demo-icon" ><i id="id-demo-icon" class="{{ icon.name }}"></i></div>
+                                                            </div>
+                                                            {% endfor %}
+                                                    </div>
+					                            </div>
+					                        </div>
+                </div>
+
+                <!--Modal footer-->
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+        <button data-target="#demo-default-modal" data-toggle="modal" class="btn btn-primary btn-lg">Launch demo modal</button>
     {% endblock%}
 
     {% block javascript %}
+    <!--Bootbox Modals [ OPTIONAL ]-->
+    <script src="/statics/plugins/bootbox/bootbox.min.js"></script>
 
+
+    <!--Modals [ SAMPLE ]-->
+    <script src="/statics/js/demo/ui-modals.js"></script>
+
+       <script>
+           $(document).ready(function () {
+            $("#id-demo-icon").on('click', function () {
+                console.log(1111)
+            });
+        });
+
+            function f(str) {
+                alert(str);
+            };
+       </script>
     {% endblock %}

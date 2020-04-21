@@ -143,7 +143,7 @@ def table_obj_add(request, app_name, table_name):
 @login_required
 def table_obj_show(request, app_name, table_name, nid):
     admin_class = site.enabled_admins[app_name][table_name]
-    dynamic_form = create_model_form(admin_class, add=False)
+    dynamic_form = create_model_form(admin_class, add=False, show=True)
     my_menu = permissions.get_permissions_menu(request.user)
     obj_id = nid
     try:
@@ -178,21 +178,18 @@ def table_obj_update(request, app_name, table_name, nid):
     if request.method == 'GET':
         return render(request, 'shuyuadmin/table_obj_update.html', locals())
     elif request.method == 'POST':
-        show_form = dynamic_form(request.POST)
+        obj = admin_class.model.objects.get(id=nid)
+        show_form = dynamic_form(request.POST, instance=obj)
         if show_form.is_valid():
-            print("1111")
-            obj = admin_class.model.objects.get(id=nid)
-            for k, v in show_form.cleaned_data.items():
-                setattr(obj, k, v)
-            from django.db import connection
-            obj.update_or_create()
-            print(connection.queries)
+            obj.save()
             success = '操作成功'
         else:
             errors = show_form.errors.as_json()
-            print(errors)
         return render(request, 'shuyuadmin/table_obj_update.html', locals())
 
 
 def test(request):
-    return render(request, 'test2.html')
+    from shuyuadmin.models import Icons
+    icons = Icons.objects.all()
+
+    return render(request, 'test.html', locals())

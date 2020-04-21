@@ -37,7 +37,7 @@
 					                    </div>
                                     {% endfor %}
                                  <div class="col-md-1 pull-right">
-                                     <input class="btn btn-primary" type="submit" value="保存">
+                                     <input class="btn btn-primary" type="submit" onclick="return f_submit()" value="保存">
                                  </div>
                                  </form>
 					        </div>
@@ -45,6 +45,7 @@
                 </div>
     <!--===================================================-->
     <!--End page content-->
+
 {% endblock %}
 
 {% block menu %}
@@ -54,7 +55,7 @@
                                         {% if menu.status %}
                                             <li class="{% get_menu_active_class my_menu table_name id %}">
                                                 <a href="#">
-                                                    <i class="demo-pli-home"></i>
+                                                    <i class="{{ menu.icon }}"></i>
                                                     <span class="menu-title">{{ menu.title }}</span>
                                                     <i class="arrow"></i>
                                                 </a>
@@ -88,4 +89,18 @@
 
     <!--Form Component [ SAMPLE ]-->
     <script src="/statics/js/demo/form-component.js"></script>
+        <script>
+        $(document).ready(function () {
+            $("#id_icon").on('click', function () {
+               alert("111")
+            });
+        });
+
+        function f_submit() {
+            if(confirm("请确认修改！")){
+                return true;
+            }
+        }
+    </script>
+
 {% endblock %}

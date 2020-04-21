@@ -162,6 +162,10 @@ class Product(models.Model):
         verbose_name_plural = "产品管理"
 
 
+class Icons(models.Model):
+    name = models.CharField(max_length=64, unique=True)
 
+    class Meta:
+        verbose_name_plural = "图标管理"
 
 
