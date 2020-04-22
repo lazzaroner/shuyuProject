@@ -59,6 +59,10 @@ def get_row_data(obj, admin_class):
                 column_data = """<span class="label label-success">{data}</span>""".format(data=column_data)
             else:
                 column_data = """<span class="label label-dark">{data}</span>""".format(data=column_data)
+        # 判断图标
+        if column == 'icon':
+            column_data = """<i class="{data}"></i>""".format(data=getattr(obj, column))
+
         ret_data += "<td>%s</td>" % column_data
     return mark_safe(ret_data)
 

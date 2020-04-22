@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from shuyuadmin.admin_sites import site
 from shuyuadmin.utils import pager, permissions
 from shuyuadmin.utils.form_handle import create_model_form
+from shuyuadmin.models import Icons
 import json
 
 
@@ -126,6 +127,7 @@ def table_obj_add(request, app_name, table_name):
     admin_class = site.enabled_admins[app_name][table_name]
     dynamic_form = create_model_form(admin_class, add=True)
     my_menu = permissions.get_permissions_menu(request.user)
+    icons = Icons.objects.all()
     errors_obj = {}
     errors = json.dumps(errors_obj)
     if request.method == 'GET':
@@ -167,6 +169,7 @@ def table_obj_update(request, app_name, table_name, nid):
     dynamic_form = create_model_form(admin_class, add=False)
     my_menu = permissions.get_permissions_menu(request.user)
     obj_id = nid
+    icons = Icons.objects.all()
     try:
         obj = admin_class.model.objects.get(id=nid)
     except admin_class.model.DoesNotExist:

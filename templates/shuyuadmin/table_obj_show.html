@@ -2,9 +2,21 @@
 {% load tags %}
 
 {% block page-head %}
-    <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}">{% get_table_name2 app_name table_name %}</a></li>
-    <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}/show/{{ obj_id }}">查看</a></li>
-
+                <div id="page-head">
+                        <div id="page-title">
+                            <h1 class="page-header text-overflow">{% get_table_name2 app_name table_name %}</h1>
+                        </div>
+                        <!--Breadcrumb-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <ol class="breadcrumb">
+                        <li><a href="/shuyuadmin/"><i class="demo-pli-home"></i></a></li>
+                        <li><a href="/shuyuadmin/">首页</a></li>
+                        <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}">{% get_table_name2 app_name table_name %}</a></li>
+                        <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}/show/{{ obj_id }}">查看</a></li>
+                        </ol>
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End breadcrumb-->
+                </div>
 {% endblock %}
 
 {% block head %}

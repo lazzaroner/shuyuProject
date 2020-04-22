@@ -121,6 +121,7 @@ class AdminSite(object):
 class MyProductAdmin(BaseAdmin):
     list_filter = ['choice1', 'choice2', 'choice3']
     list_per_page = 4
+    search_fields = ['name']
 
 
 class MyPermissionAdmin(BaseAdmin):

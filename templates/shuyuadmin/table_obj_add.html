@@ -2,10 +2,23 @@
 {% load tags %}
 
 {% block page-head %}
-    <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}">{% get_table_name2 app_name table_name %}</a></li>
-    <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}/add">添加</a></li>
-
+                <div id="page-head">
+                        <div id="page-title">
+                            <h1 class="page-header text-overflow">{% get_table_name2 app_name table_name %}</h1>
+                        </div>
+                        <!--Breadcrumb-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <ol class="breadcrumb">
+                        <li><a href="/shuyuadmin/"><i class="demo-pli-home"></i></a></li>
+                        <li><a href="/shuyuadmin/">首页</a></li>
+                        <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}">{% get_table_name2 app_name table_name %}</a></li>
+                        <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}/add">添加</a></li>
+                        </ol>
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End breadcrumb-->
+                </div>
 {% endblock %}
+
 
 {% block head %}
     <!--Switchery [ OPTIONAL ]-->
@@ -68,6 +81,37 @@
 					        </div>
 					    </div>
 
+                        <!--Default Bootstrap Modal-->
+                        <!--===================================================-->
+                        <div class="modal fade" id="demo-default-modal" role="dialog" tabindex="-1" aria-labelledby="demo-default-modal" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!--Modal header-->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">点击图标进行选择</h4>
+                                    </div>
+
+                                    <!--Modal body-->
+                                    <div class="modal-body">
+
+                                                                <div class="nano" style="height:360px">
+                                                                    <div class="nano-content">
+                                                                        <div class="clearfix demo-icon-list">
+                                                                                 {% for icon in icons %}
+                                                                                <div class="col-sm-1 col-md-2">
+                                                                                    <div class="demo-icon" ><i id="id-demo-icon" data-dismiss="modal" class="{{ icon.name }}" onclick="choose_icons('{{ icon.name }}')"></i></div>
+                                                                                </div>
+                                                                                {% endfor %}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--===================================================-->
+                        <!--End Default Bootstrap Modal-->
 
 
 
@@ -145,5 +189,32 @@
 
     <!--Form Component [ SAMPLE ]-->
     <script src="/statics/js/demo/form-component.js"></script>
+    <!--Modals [ SAMPLE ]-->
+    <script src="/statics/js/demo/ui-modals.js"></script>
+            <script>
+        $(document).ready(function () {
+            $("#id_icon").on('click', function () {
+                $('#demo-default-modal').css('display', "Block");
+                $('#demo-default-modal').addClass('in');
+                let div = $("<div class='modal-backdrop fade in' ></div>");
+                $('body').append(div);
+                $('body').addClass('modal-open');
+            });
+        });
 
+        function f_submit() {
+            if(confirm("请确认修改！")){
+                return true;
+            }
+        };
+
+        function choose_icons(icon_text) {
+                $('#id_icon').attr('value', icon_text);
+                $('#demo-default-modal').css('display', "none");
+                $('#demo-default-modal').removeClass('in');
+                $('div').remove('.modal-backdrop.fade.in');
+                $('body').removeClass('modal-open');
+
+            };
+    </script>
 {% endblock %}
