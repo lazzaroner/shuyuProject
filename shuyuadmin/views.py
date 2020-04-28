@@ -119,7 +119,7 @@ def table_obj_display(request, app_name, table_name):
         'my_menu': permissions.get_permissions_menu(request.user),
     }
 
-    return render(request, 'shuyuadmin/table_obj_display.html', return_data)
+    return render(request, 'shuyuadmin/%s_display.html' % admin_class.display_html_pre, return_data)
 
 
 @login_required
@@ -175,6 +175,9 @@ def table_obj_update(request, app_name, table_name, nid):
     except admin_class.model.DoesNotExist:
         return redirect('/shuyuadmin/%s/%s' % (app_name, table_name))
     show_form = dynamic_form(instance=obj)
+    for _field in show_form:
+        print(_field)
+
     errors_obj = {}
     errors = json.dumps(errors_obj)
     success = ''

@@ -158,6 +158,9 @@ class Product(models.Model):
     size = models.CharField(max_length=10)
     comment = models.TextField()
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name_plural = "产品管理"
 
@@ -165,7 +168,9 @@ class Product(models.Model):
 class Icons(models.Model):
     name = models.CharField(max_length=64, unique=True)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name_plural = "图标管理"
-
 

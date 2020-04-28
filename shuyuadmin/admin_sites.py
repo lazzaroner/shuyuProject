@@ -3,15 +3,23 @@ from shuyuadmin import models
 
 
 class BaseAdmin(object):
+    # 显示的字段 ['id', 'title']
     list_display = []
+    # 中文显示 如 {'title': '标题'}
+    field_display_cn = {}
+    # 选择项过滤器字段
     list_filter = []
+    # insert、update 显示的字段
     fields = []
+    # 搜索项过滤字段
     search_fields = []
-    filter_horizontal = []
+    # 每页记录属
     list_per_page = 8
     actions = []
+    # 只读字段
     readonly_fields = []
-    pass
+    # 指定 显示、添加、修改页面 的前缀
+    display_html_pre = 'table_obj'
 
 
 class AdminSite(object):
@@ -129,7 +137,11 @@ class MyPermissionAdmin(BaseAdmin):
 
 
 class MyMenuAdmin(BaseAdmin):
+    list_display = ['id', 'icon', 'title', 'open', 'sort_index', 'parent']
+    field_display_cn = {'id': '编号', 'title': '菜单名称', 'open': '是否显示', 'sort_index': '排序序号', 'icon': '菜单图标', 'parent': '父菜单'}
+    fields = ['icon', 'title', 'open', 'sort_index', 'parent']
     readonly_fields = ['title']
+    display_html_pre = 'menu'
 
 
 site = AdminSite()
@@ -141,8 +153,8 @@ site.register(Permission, MyPermissionAdmin)
 site.register(models.Product, MyProductAdmin)
 
 # 修改model执行makemigrations的时候 要注释掉如下部分
-site.init_tables(Role)
-site.init_tables(MyUser)
-site.init_tables(Menu)
-site.init_tables(Permission)
-site.init_tables(models.Product)
+# site.init_tables(Role)
+# site.init_tables(MyUser)
+# site.init_tables(Menu)
+# site.init_tables(Permission)
+# site.init_tables(models.Product)

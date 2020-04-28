@@ -71,7 +71,7 @@
                                                     <thead>
                                                         <tr>
                                                             {% for cloumn in admin_class.list_display %}
-                                                            <th>{{ cloumn }}</th>
+                                                            <th>{% get_field_cn admin_class cloumn %}</th>
                                                             {% endfor %}
                                                             <th class="text-right"></th>
                                                         </tr>
@@ -107,6 +107,9 @@
                                 <hr>
 					            <!--Pagination-->
                                 <div class="text-center">
+                                                <ul class="pagination text-nowrap mar-no">
+                                                    <li class="page-number"><a href="">共 {{ page_data.record_count}} 条</a></li>
+                                                </ul>
                                                 <ul class="pagination text-nowrap mar-no">
                                                     <li class="page-number"><a href="?page=1{% get_filter_conditions_url admin_class %}">首页</a></li>
                                                     <li class="page-pre">

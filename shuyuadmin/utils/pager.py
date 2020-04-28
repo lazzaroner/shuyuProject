@@ -21,6 +21,8 @@ def table_filter(request, admin_class):
             if admin_class.search_fields:
                 for filter_field in admin_class.search_fields:
                     q1.children.append(('%s__icontains' % filter_field, item[1]))
+            else:
+                q1.children.append(item)
     con.add(q1, 'AND')
 
     # 针对list_filter进行Q操作

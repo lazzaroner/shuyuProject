@@ -253,3 +253,29 @@ def get_errors_message(errors, field_name):
     if message_list:
         return message_list[0].get('message')
     return ''
+
+
+@register.simple_tag
+def get_field_cn(admin_class, cloumn):
+    """
+    根据字段名显示中文
+    :param admin_class:
+    :param cloumn:
+    :return:
+    """
+    return admin_class.field_display_cn.get(cloumn) or cloumn
+
+
+@register.simple_tag
+def check_parent(filter_conditions):
+    """
+    判断是否显示子菜单
+    :param filter_conditions:
+    :return:
+    """
+    print(filter_conditions)
+    if filter_conditions:
+        for c in filter_conditions:
+            if c[0] == 'parent':
+                return False
+    return True

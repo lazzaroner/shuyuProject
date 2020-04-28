@@ -5,18 +5,18 @@ def create_model_form(admin_class, add=False, show=False):
 
     class Meta:
         model = admin_class.model  # 指定类
-        fields = '__all__'  # 指定字段
+        if admin_class.list_display:
+            fields = admin_class.list_display
+        else:
+            fields = '__all__'  # 指定字段
         # exclude = admin_class.readonly_fields  # 排除指定的字段，也不会生成form对象
         if add:
             exclude = []
 
     def __new__(cls, *args, **kwargs):
         # 方法2：在实例化类对象（model_form()）的时候给input框增加样式
-        # print(cls.base_fields)  # 当地类的所有字段
         for field_name, field_obj in cls.base_fields.items():
-            from django.forms.fields import TypedChoiceField
-            from django.forms.models import ModelMultipleChoiceField
-            print(field_name, field_obj, isinstance(field_obj, TypedChoiceField), isinstance(field_obj, ModelMultipleChoiceField))
+            print(field_name, field_obj)
             # # 单选
             # if isinstance(field_obj, TypedChoiceField):
             #     field_obj.widget.attrs.update({'id': 'demo-chosen-select'})

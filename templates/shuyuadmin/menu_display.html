@@ -1,0 +1,223 @@
+{% extends 'shuyuadmin/table_obj_index.html' %}
+{% load tags %}
+
+{% block page-head %}
+                <div id="page-head">
+                        <div id="page-title">
+                            <h1 class="page-header text-overflow">{% get_table_name2 app_name table_name %}</h1>
+                        </div>
+                        <!--Breadcrumb-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <ol class="breadcrumb">
+                        <li><a href="/shuyuadmin/"><i class="demo-pli-home"></i></a></li>
+                        <li><a href="/shuyuadmin/">首页</a></li>
+                        <li><a href="/shuyuadmin/{{ app_name }}/{{ table_name }}">{% get_table_name2 app_name table_name %}</a></li>
+                        </ol>
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End breadcrumb-->
+                </div>
+{% endblock %}
+
+
+{% block search %}
+            {% if admin_class.search_fields %}
+                <div class="row pad-ver">
+                    <form action="" method="get" class="col-xs-12 col-sm-10 col-sm-offset-1 pad-hor">
+                        <div class="input-group mar-btm">
+                             <input type="text" placeholder="输入{% get_search_filter_filed_name admin_class %}进行查询" class="form-control input-small" name="q" value="{% get_search_filter_filed_value admin_class.filter_conditions %}">
+                             <span class="input-group-btn">
+                                 <button class="btn btn-primary btn-small" type="submit">查询</button>
+                             </span>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+{% endblock %}
+
+{% block page-content %}
+    <!--Page content-->
+    <!--===================================================-->
+    <div id="page-content">
+
+					    <div class="panel">
+					        <div class="panel-body">
+                                {% for field in admin_class.list_filter %}
+                                    <div class="pad-hor mar-top">
+                                       <button class="btn btn-primary btn-labeled">{% get_list_filter_title admin_class field %}</button>
+                                        {% get_list_filter_options admin_class field %}
+                                    </div>
+                                {% endfor %}
+
+                                {% if admin_class.list_filter %}
+                                    <div class="row pull-right"><a class="btn btn-sm btn-default" href="/shuyuadmin/{{ app_name }}/{{ table_name }}">重置条件</a></div>
+                                    <hr>
+                                {% endif %}
+
+
+                                {% check_permission request.user app_name table_name 'table_obj_add' as has_add_permission %}
+
+                                {% if has_add_permission %}
+                                <div class="pad-btm form-inline">
+                                                <div class="row">
+                                                    <div class="col-sm-6 table-toolbar-left">
+                                                        <button id='table_obj_add' class="btn btn-purple"><i class="demo-pli-add icon-fw"></i>添加</button>
+                                                    </div>
+                                                </div>
+                                </div>
+                                {% endif %}
+
+                                <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            {% for cloumn in admin_class.list_display %}
+                                                             <th>{% get_field_cn admin_class cloumn %}</th>
+                                                            {% endfor %}
+                                                            <th class="text-right"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% check_parent admin_class.filter_conditions as is_parent %}
+                                                    {% if is_parent %}
+                                                        {% for obj in page_data.page %}
+                                                                    {% if not obj.parent%}
+                                                                    <tr>
+                                                                        {% get_row_data obj admin_class %}
+                                                                        <td class="text-right">
+                                                                            <div class="btn-group">
+                                                                                {% check_permission request.user app_name table_name 'table_obj_delete' as has_delete_permission %}
+                                                                                {% check_permission request.user app_name table_name 'table_obj_update' as has_update_permission %}
+                                                                                {% check_permission request.user app_name table_name 'table_obj_display' as has_display_permission %}
+                                                                                {% get_row_id obj as obj_id %}
+
+                                                                                <a class="btn btn-sm btn-default btn-hover-info demo-pli-right-4 add-tooltip" href="?parent={{ obj_id }}" data-original-title="查看子菜单" data-container="body"></a>
+                                                                                {% if has_display_permission %}
+                                                                                    <a class="btn btn-sm btn-default btn-hover-info demo-pli-information add-tooltip" href="{% url 'table_obj_show' app_name table_name obj_id%}" data-original-title="查看" data-container="body"></a>
+                                                                                {% endif %}
+                                                                                {% if has_update_permission %}
+                                                                                    <a class="btn btn-sm btn-default btn-hover-success demo-psi-pen-5 add-tooltip" href="{% url 'table_obj_update' app_name table_name obj_id%}" data-original-title="编辑" data-container="body"></a>
+                                                                                {% endif %}
+                                                                                {% if has_delete_permission %}
+                                                                                    <a class="btn btn-sm btn-default btn-hover-danger demo-pli-trash add-tooltip" onclick="del({{ obj_id }})" data-original-title="删除" data-container="body"></a>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    {% endif %}
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        {% for obj in page_data.page %}
+                                                                    {% if  obj.parent%}
+                                                                    <tr>
+                                                                        {% get_row_data obj admin_class %}
+                                                                        <td class="text-right">
+                                                                            <div class="btn-group">
+                                                                                {% check_permission request.user app_name table_name 'table_obj_delete' as has_delete_permission %}
+                                                                                {% check_permission request.user app_name table_name 'table_obj_update' as has_update_permission %}
+                                                                                {% check_permission request.user app_name table_name 'table_obj_display' as has_display_permission %}
+                                                                                {% get_row_id obj as obj_id %}
+
+                                                                                <a class="btn btn-sm btn-default btn-hover-info demo-pli-right-4 add-tooltip" href="?parent={{ obj_id }}" data-original-title="查看子菜单" data-container="body"></a>
+                                                                                {% if has_display_permission %}
+                                                                                    <a class="btn btn-sm btn-default btn-hover-info demo-pli-information add-tooltip" href="{% url 'table_obj_show' app_name table_name obj_id%}" data-original-title="查看" data-container="body"></a>
+                                                                                {% endif %}
+                                                                                {% if has_update_permission %}
+                                                                                    <a class="btn btn-sm btn-default btn-hover-success demo-psi-pen-5 add-tooltip" href="{% url 'table_obj_update' app_name table_name obj_id%}" data-original-title="编辑" data-container="body"></a>
+                                                                                {% endif %}
+                                                                                {% if has_delete_permission %}
+                                                                                    <a class="btn btn-sm btn-default btn-hover-danger demo-pli-trash add-tooltip" onclick="del({{ obj_id }})" data-original-title="删除" data-container="body"></a>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    {% endif %}
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+                                <hr>
+					            <!--Pagination-->
+                                <div class="text-center">
+                                                <ul class="pagination text-nowrap mar-no">
+                                                    <li class="page-number"><a href="">共 {{ page_data.record_count}} 条</a></li>
+                                                </ul>
+                                                <ul class="pagination text-nowrap mar-no">
+                                                    <li class="page-number"><a href="?page=1{% get_filter_conditions_url admin_class %}">首页</a></li>
+                                                    <li class="page-pre">
+                                                        <a href="?page={{ page_data.page_previous }}{% get_filter_conditions_url admin_class %}">&lt;</a>
+                                                    </li>
+                                                    {% for i in  page_data.dis_range %}
+                                                        {% if i == page_data.page_num %}
+                                                            <li class="page-number active"><a href="?page={{ i }}{% get_filter_conditions_url admin_class %}">{{i}}</a></li>
+                                                        {% else %}
+                                                            <li class="page-number"><a href="?page={{ i }}{% get_filter_conditions_url admin_class %}">{{i}}</a></li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    <li class="page-next">
+                                                        <a href="?page={{ page_data.page_next }}{% get_filter_conditions_url admin_class %}">&gt;</a>
+                                                    </li>
+                                                    <li class="page-number"><a href="?page={{ page_data.paginator.num_pages }}{% get_filter_conditions_url admin_class %}">尾页</a></li>
+                                                </ul>
+                                            </div>
+
+					        </div>
+					    </div>
+
+
+
+                </div>
+    <!--===================================================-->
+    <!--End page content-->
+{% endblock %}
+
+{% block menu %}
+                                 <!--Category name-->
+                                <ul id="mainnav-menu" class="list-group">
+                                    {% for id, menu in my_menu.items %}
+                                        {% if menu.status %}
+                                            <li class="{% get_menu_active_class my_menu table_name id %}">
+                                                <a href="#">
+                                                    <i class="{{menu.icon}}"></i>
+                                                    <span class="menu-title">{{ menu.title }}</span>
+                                                    <i class="arrow"></i>
+                                                </a>
+
+
+                                                <!--Submenu-->
+                                                <ul class="collapse">
+                                                    {% for children_menu in menu.children %}
+                                                        {% for sub_id, sub_menu in children_menu.items %}
+                                                            {% if  sub_menu.status %}
+                                                                <li class="{% get_menu_url_active_class my_menu table_name sub_id %}"><a href="/shuyuadmin/{{ sub_menu.app_name }}/{{ sub_menu.table_name }}">{{ sub_menu.title }}</a></li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                </ul>
+
+{% endblock %}
+
+{% block javascript %}
+
+        <script>
+        $(document).ready(function () {
+            $("#table_obj_add").on('click', function () {
+                window.location.href="/shuyuadmin/{{ app_name }}/{{ table_name }}/add";
+            });
+        });
+
+        function del(obj_id) {
+            if(confirm("请确认删除！")){
+                window.location.href="/shuyuadmin/{{ app_name }}/{{ table_name }}/delete/"+obj_id;
+            }
+        }
+    </script>
+
+{% endblock %}
