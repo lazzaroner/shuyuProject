@@ -175,8 +175,6 @@ def table_obj_update(request, app_name, table_name, nid):
     except admin_class.model.DoesNotExist:
         return redirect('/shuyuadmin/%s/%s' % (app_name, table_name))
     show_form = dynamic_form(instance=obj)
-    for _field in show_form:
-        print(_field)
 
     errors_obj = {}
     errors = json.dumps(errors_obj)

@@ -52,6 +52,7 @@ class AdminSite(object):
                     continue
                 list_display.append(l.name)
             admin_class.list_display = list_display
+            admin_class.fields = list_display
         admin_class.model = model_class
 
         # 如果admin 没有配置，则默认获取所有字段
@@ -139,7 +140,7 @@ class MyPermissionAdmin(BaseAdmin):
 class MyMenuAdmin(BaseAdmin):
     list_display = ['id', 'icon', 'title', 'open', 'sort_index', 'parent']
     field_display_cn = {'id': '编号', 'title': '菜单名称', 'open': '是否显示', 'sort_index': '排序序号', 'icon': '菜单图标', 'parent': '父菜单'}
-    fields = ['icon', 'title', 'open', 'sort_index', 'parent']
+    fields = ['title', 'icon', 'open', 'sort_index', 'parent']
     readonly_fields = ['title']
     display_html_pre = 'menu'
 

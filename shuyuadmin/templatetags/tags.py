@@ -273,9 +273,20 @@ def check_parent(filter_conditions):
     :param filter_conditions:
     :return:
     """
-    print(filter_conditions)
     if filter_conditions:
         for c in filter_conditions:
             if c[0] == 'parent':
                 return False
     return True
+
+
+@register.simple_tag
+def get_cn_label(admin_class, label):
+    """
+    返回中文名称
+    :param admin_class:
+    :param label:
+    :return:
+    """
+    label = str(label).replace(' ', '_').lower()
+    return admin_class.field_display_cn.get(label) or label

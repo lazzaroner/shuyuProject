@@ -6,7 +6,7 @@ def create_model_form(admin_class, add=False, show=False):
     class Meta:
         model = admin_class.model  # 指定类
         if admin_class.list_display:
-            fields = admin_class.list_display
+            fields = admin_class.fields
         else:
             fields = '__all__'  # 指定字段
         # exclude = admin_class.readonly_fields  # 排除指定的字段，也不会生成form对象
@@ -49,6 +49,7 @@ def create_model_form(admin_class, add=False, show=False):
                     pass
                 else:
                     field_obj.widget.attrs.update({'readonly': 'readonly'})
+
         return ModelForm.__new__(cls)
 
     dynamic_form = type("DynamicModelForm", (ModelForm,), {'Meta': Meta, '__new__': __new__})
